@@ -42,8 +42,6 @@ def numberOfTreesEncountered(slope, size, right, down):
         
         position = position_down + position_right
 
-        
-
     # Debug
     #modified = "".join(modified)
     #for i in range(len(lines)):
