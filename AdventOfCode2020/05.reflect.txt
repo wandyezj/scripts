@@ -1,0 +1,6 @@
+Couldn't this have been translated directly to binary?
+
+Replace upper halfs with 1 Replace lower halfs with 0
+
+use
+int(seat, base=2)
