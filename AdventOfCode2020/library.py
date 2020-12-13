@@ -35,3 +35,6 @@ def defaultInputFile(file):
     '''
     number = file.split(".")[-2]
     return number + ".input.txt"
+
+def manhattenDistance(x, y):
+    return abs(x) + abs(y)
