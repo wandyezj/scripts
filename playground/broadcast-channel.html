@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Broadcast Channel</h1>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel">Broadcast Channel MDN</a></p>
+
+<p>Show multiple windows using the broadcast channel to communicate</p>
+
+<p>guid: <span id="guid">?</span></p>
+
+<table id="messages">
+    <thead>
+        <tr><td>From Message</td></tr>
+    </thead>
+    <tbody id="received">
+
+    </tbody>
+</table>
+
+</body>
+
+<script>
+    const channelGlobal = new BroadcastChannel('global');
+    const guid = getGuid(); // unique id to identify the window
+
+    // quick and dirty guid generator
+    // Use an actual guid generation if in production
+    function getGuid() {
+        const size = 5;
+        return Math.round(Math.random() * Math.pow(10, size -1)).toString().padStart(size, "0");
+    }
+
+    function createMessage(messageType) {
+        return {
+            messageType,
+            from: guid,
+        }
+    }
+
+    // Announce Alive - and announce channel
+    function createMessageAnnounce() {
+        return createMessage("announce");
+    }
+
+    // Ask Alive - what others are alive
+    function createMessageAsk() {
+
+    }
+
+    function addToReceived(message) {
+        const table = document.getElementById("messages");
+        const row = table.insertRow(1);
+        const cell = row.insertCell();
+        cell.innerHTML = Date.now() +" " +JSON.stringify(message);
+    }
+
+    function initialize() {
+        document.getElementById("guid").innerText = guid;
+
+        channelGlobal.postMessage(createMessageAnnounce());
+
+        channelGlobal.onmessage = onMessage;
+    }
+
+    function onMessage(ev) {
+        const data = ev.data;
+        addToReceived(data);
+    }
+
+
+
+    initialize();
+</script>
+
+</html>
