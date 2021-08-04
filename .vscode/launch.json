@@ -5,6 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Node: Current File (Integrated Terminal)",
+      "type": "node",
+      "request": "launch",
+      "program": "${file}",
+
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      
+      "console": "integratedTerminal"
+    },
+    {
       "name": "Python: Current File (Integrated Terminal)",
       "type": "python",
       "request": "launch",
