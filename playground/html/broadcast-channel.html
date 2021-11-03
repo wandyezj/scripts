@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<header>
+    <title id="title">Broadcast Channel</title>
+</header>
 <body>
 
 <h1>Broadcast Channel</h1>
@@ -57,6 +60,7 @@
 
     function initialize() {
         document.getElementById("guid").innerText = guid;
+        document.getElementById("title").innerText = "Broadcast Channel " + guid;
 
         channelGlobal.postMessage(createMessageAnnounce());
 
