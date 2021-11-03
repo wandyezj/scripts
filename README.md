@@ -1,3 +1,5 @@
 # scripts
 
-Script Wizard Scripts
+Scripts
+
+Repository to contain my scripts.
