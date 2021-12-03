@@ -15,6 +15,7 @@ def read_file_lines(file):
 
 def read_file_lines_int(file):
     ints = []
+    lines = read_file_lines(file)
     for line in lines:
         n = int(number)
         ints.append(n)
