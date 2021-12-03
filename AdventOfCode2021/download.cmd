@@ -11,4 +11,4 @@ REM set year=
 REM set session=
 call %THISDIR%\session.cmd
 
-python.exe %THISDIR%\get_input.py %year% %day% %session%
+python.exe %THISDIR%\download.py %year% %day% %session%
