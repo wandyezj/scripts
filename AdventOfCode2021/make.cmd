@@ -1,11 +1,9 @@
-setlocal
-set n=%1
-if not defined n (
-    echo usage make.cmd number
-    goto :eof
-)
+@setlocal
+@echo off
 
-echo. > %n%.data.sample.txt
-echo. > %n%.data.txt
-echo. > %n%.puzzle.txt
-echo. > %n%.py
+set THISDIR=%~dp0
+set THISDIR=%THISDIR:~,-1%
+
+call %THISDIR%\session.cmd
+
+python.exe %THISDIR%\make.py %day%
