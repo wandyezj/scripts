@@ -56,6 +56,8 @@ for line in lines:
 
 print(depth * position)
 
+
+print("Part 2")
 aim = 0
 position = 0
 depth = 0
