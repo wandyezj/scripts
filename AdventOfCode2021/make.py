@@ -18,7 +18,6 @@ def run():
         'data.sample.txt',
         'data.txt',
         'puzzle.txt',
-        'py',
         'reflect.md'
     ]
 
@@ -30,5 +29,33 @@ def run():
             write_file(name,"")
         else:
             print("{:<20} - already exists!".format(name))
+
+    postfix = "py"
+    name = prefix + "." + postfix
+
+    if not os.path.exists(name):
+        write_file(name, '''
+number = "{}"
+file_sample = number + ".data.sample.txt"
+file = number + ".data.txt"
+
+def read_file_lines(file):
+    f = open(file)
+    data = f.read()
+    f.close()
+    return data.strip().split("\\n")
+
+lines = read_file_lines(file_sample)
+
+
+
+print("Part 1")
+
+
+
+print("Part 2")
+
+
+'''.format(prefix))
 
 run()
