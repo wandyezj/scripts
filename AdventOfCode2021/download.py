@@ -39,7 +39,7 @@ def run():
 
     data = download_data(year, day, session)
 
-    file = "{}.data.txt".format(str(day).zfill(2))
+    file = "{}.data.txt".format(str(int(day)).zfill(2))
 
     print()
     print(file)
