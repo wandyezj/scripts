@@ -18,7 +18,7 @@ def run():
         'data.sample.txt',
         'data.txt',
         'puzzle.txt',
-        'reflect.md'
+        'learn.md'
     ]
 
     for postfix in files:
@@ -48,11 +48,11 @@ def read_file_lines(file):
 lines = read_file_lines(file_sample)
 
 
-
+print("")
 print("Part 1")
 
 
-
+print("")
 print("Part 2")
 
 
