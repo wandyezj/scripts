@@ -15,13 +15,13 @@ number = "{}"
 file_sample = number + ".data.sample.txt"
 file = number + ".data.txt"
 
-def read_file_lines(file):
+def read_file(file):
     f = open(file)
     data = f.read()
     f.close()
-    return data.strip().split("\\n")
+    return data.strip()
 
-lines = read_file_lines(file_sample)
+lines = read_file(file_sample)
 
 
 print("")
