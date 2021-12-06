@@ -37,7 +37,7 @@ def run():
     session: {}
     '''.format(year, day, session))
 
-    data = download_data(year, day, session)
+    data = download_data(year, str(int(day)), session)
 
     file = "{}.data.txt".format(str(int(day)).zfill(2))
 
