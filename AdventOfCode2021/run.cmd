@@ -10,4 +10,6 @@ call %THISDIR%\session.cmd
 
 set name=%day%.py
 
+set switch=%1
+
 python.exe %THISDIR%\%name% %*
