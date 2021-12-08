@@ -21,7 +21,7 @@ def read_file(file):
     f.close()
     return data.strip()
 
-lines = read_file(file_sample)
+data = read_file(file_sample)
 
 
 print("")
