@@ -81,21 +81,33 @@ f = df - d
 c = bc - cf
 b = bc - c
 
+abcdf = a + b + c + d + f
+
+g = 6 segment - abcdf
+eg = 6 segment - abcdf
+
+e = eg - g
+
+abcd fg + ab defg + abc efg
+
 e
 g
 
 # 
 
-derive sets to digits
+
+create complete set of digits and match to values can sort and match with map
+
+look up each value in the map and put together and add to total
 
 '''
 
 def splitter(line):
     signals, values = line.split(" | ")
     signals = signals.split()
-    signals.sort()
+    #signals.sort()
     values = values.split()
-    values.sort()
+    #values.sort()
     return (signals, values)
 
 lines = list(map(splitter, data.split("\n")))
@@ -137,16 +149,135 @@ but when a single
 '''
 
 # count segments
+total = 0
 for signals, values in lines:
-    l = list(map(lambda x: len(x), signals))
+    
 
     # segments
     # proof that each number is represented
+    #l = list(map(lambda x: len(x), signals))
     #counts = list(map(lambda x : l.count(x), [2,3,4,5,6,7]))
     #print(counts)
 
+    s2 = None
+    s3 = None
+    s4 = None
+    s5s = []
+    s6s = []
+    s7 = None
+
+    for s in signals:
+        size = len(s)
+        v = set(list(s))
+        if size == 2:
+            s2 = v
+        elif size == 3:
+            s3 = v
+        elif size == 4:
+            s4 = v
+        elif size == 5:
+            s5s.append(v)
+        elif size == 6:
+            s6s.append(v)
+        elif size == 7:
+            s7 = v
+
+    cf = s2
+    acf = s3
+    bcdf = s4
+    abcdefg = s7
+    a = acf - cf
+    bd = bcdf - cf
+    aeg = abcdefg - bcdf
+    eg = aeg - a
+
+    b = None
+    # abc efg
+    # ab defg
+    # abcd fg
+    for s in s6s:
+
+        find_b = (s - aeg) - cf
+        if len(find_b) == 1:
+            b = find_b
+        pass
+
+    d = bd - b
+
+    g = None
+    # a cde g
+    # a cd fg
+    # ab d fg
+    for s in s5s:
+
+        find_g = s - (a | cf | d)
+        if len(find_g) == 1:
+            g = find_g
+
+    e = eg - g
+
+    # split cf
+    c = None
+    # a cde g
+    # a cd fg
+    # ab d fg
+    for s in s5s:
+
+        find_c = s - (a | d | e | g)
+        if len(find_c) == 1:
+            c = find_c
+
+    f = cf - c
+
+    # now have the correct mapping of all segments
+
+    # map segments to numbers
+    a,b,c,d,e,f,g = list(map(lambda x: list(x), [a,b,c,d,e,f,g]))
+    #print([a,b,c,d,e,f,g])
+    a,b,c,d,e,f,g = list(map(lambda x: x[0], [a,b,c,d,e,f,g]))
 
 
-#print(total)
+    # n0 = a + b + c + e + f + g
+    # n1 = c + f
+    # n2 = a + c + d + e + g
+    # n3 = a + c + d + f + g
+    # n4 = b + c + d + f
+    # n5 = a + b + d + f + g
+    # n6 = a + b + d + e + f + g
+    # n7 = a + c + f
+    # n8 = a + b + c + d + e + f + g
+    # n9 = a + b + c + d + f + g
+
+    n0 = [a, b, c, e, f, g]
+    n1 = [c, f]
+    n2 = [a, c, d, e, g]
+    n3 = [a, c, d, f, g]
+    n4 = [b, c, d, f]
+    n5 = [a, b, d, f, g]
+    n6 = [a, b, d, e, f, g]
+    n7 = [a, c, f]
+    n8 = [a, b, c, d, e, f, g]
+    n9 = [a, b, c, d, f, g]
+
+    nx = [n0, n1, n2, n3, n4, n5, n6, n7, n8, n9]
+    for n in nx:
+        n.sort()
+
+    nx = list(map(lambda x: "".join(x), nx))
+
+    #print(nx)
+    values = list(map(list, values))
+    for v in values:
+        v.sort()
+    values = list(map(lambda x: "".join(x), values))
+    #print(nx)
+    #print(values)
+    numbers = list(map(lambda x: nx.index(x), values))
+    numbers = list(map(lambda x: str(x), numbers))
+    number = int("".join(numbers))
+    #print(number)
+    total += number
+
+print(total)
 
 
