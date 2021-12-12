@@ -35,6 +35,8 @@ def print_grid(grid):
 def in_bounds(grid, x, y):
     return y >= 0 and y < len(grid) and x >= 0 and x < len(grid[y])
 
+# Grid square neighbor offsets
+
 grid_square_left = (-1, 0)
 grid_square_right = (1,0)
 grid_square_up = (0, -1)
@@ -45,14 +47,17 @@ grid_square_up_left = (-1, -1)
 grid_square_down_right = (1, 1)
 grid_square_down_left = (-1, 1)
 
-grid_squares_vertical_horizontal = [grid_square_left, grid_square_right, grid_square_up, grid_square_down]
+grid_squares_vertical = [grid_square_up, grid_square_down]
+grid_squares_horizontal = [grid_square_left, grid_square_right]
+grid_squares_vertical_horizontal = grid_squares_vertical + grid_squares_horizontal
 grid_squares_diagonal = [grid_square_up_right, grid_square_up_left, grid_square_down_right, grid_square_down_left]
-grid_squares = [grid_square_left, grid_square_right, grid_square_up, grid_square_down, grid_square_up_right, grid_square_up_left, grid_square_down_right, grid_square_down_left]
+grid_squares = grid_squares_vertical_horizontal  + grid_squares_diagonal
 
 def to_ints(line):
     l = list(line)
     return list(map(lambda x: int(x), l))
 
+# grid[y][x] of numbers 0-9
 def get_int_grid(data):
     grid = list(map(
         to_ints, 
