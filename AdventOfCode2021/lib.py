@@ -32,6 +32,33 @@ def print_grid(grid):
             print(o, end="")
     print()
 
+def in_bounds(grid, x, y):
+    return y >= 0 and y < len(grid) and x >= 0 and x < len(grid[y])
+
+grid_square_left = (-1, 0)
+grid_square_right = (1,0)
+grid_square_up = (0, -1)
+grid_square_down = (0,1)
+
+grid_square_up_right = (1, -1)
+grid_square_up_left = (-1, -1)
+grid_square_down_right = (1, 1)
+grid_square_down_left = (-1, 1)
+
+grid_squares_vertical_horizontal = [grid_square_left, grid_square_right, grid_square_up, grid_square_down]
+grid_squares_diagonal = [grid_square_up_right, grid_square_up_left, grid_square_down_right, grid_square_down_left]
+grid_squares = [grid_square_left, grid_square_right, grid_square_up, grid_square_down, grid_square_up_right, grid_square_up_left, grid_square_down_right, grid_square_down_left]
+
+def to_ints(line):
+    l = list(line)
+    return list(map(lambda x: int(x), l))
+
+def get_int_grid(data):
+    grid = list(map(
+        to_ints, 
+        data.split("\n")))
+    return grid
+
 def read_file(file):
     f = open(file)
     data = f.read()
