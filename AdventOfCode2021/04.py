@@ -3,6 +3,7 @@ number = "04"
 file_sample = number + ".data.sample.txt"
 file = number + ".data.txt"
 
+
 def read_file_lines(file):
     f = open(file)
     data = f.read()
