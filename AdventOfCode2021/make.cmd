@@ -7,3 +7,5 @@ set THISDIR=%THISDIR:~,-1%
 call %THISDIR%\session.cmd
 
 python.exe %THISDIR%\make.py %day%
+
+call download.cmd
