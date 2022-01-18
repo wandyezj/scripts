@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <title id="title">Spawn Window</title>
+
+    <style>
+        /* html {
+            overflow: auto;
+        }
+
+        html,
+        body,
+        div,
+        iframe {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            border: none;
+        }
+
+        iframe {
+            display: block;
+            width: 100%;
+            border: none;
+            overflow-y: auto;
+            overflow-x: hidden;
+        } */
+    </style>
+</header>
+
+<body>
+
+    <h1>Spawn Window</h1>
+
+    <p>Show multiple windows</p>
+
+    <p>guid: <span id="guid">?</span></p>
+
+    <button id="main_button" onclick="spawn_child()">Spawn</button>
+    <!-- <br>
+    <br>
+    <textarea id="text_area" cols="30" rows="1" id="stuff">book</textarea>
+    <br>
+    <br> -->
+    <table id="messages">
+        <thead>
+            <tr>
+                <td>From Message</td>
+            </tr>
+        </thead>
+        <tbody id="received">
+
+        </tbody>
+    </table>
+
+    <!-- <iframe src="https://vscode.dev" title="Visual Studio Code Online" width="100%" height="100%"
+        scrolling="auto"></iframe> -->
+
+</body>
+
+<script>
+    const guid = getGuid(); // unique id to identify the window
+    let child = undefined;
+
+    // quick and dirty guid generator
+    // Use an actual guid generation if in production
+    function getGuid() {
+        const size = 3;
+        return Math.round(Math.random() * Math.pow(10, size - 1)).toString().padStart(size, "0");
+    }
+
+    function displayGuid() {
+        document.getElementById("guid").innerText = guid;
+        document.title = `Spawn ${guid}`;
+    }
+
+    function initialize() {
+        displayGuid();
+        window.addEventListener("message", onMessage);
+
+        if (window.opener) {
+            switchMainButtonToSayHi();
+        }
+        // const parent = window.parent;
+        // if (parent) {
+        //     parent.onmessage(addToReceived);
+        // }
+    }
+
+    function switchMainButtonToSayHi() {
+        const main_button = document.getElementById("main_button");
+        main_button.innerText = "Say Hi!";
+        main_button.onclick = sayHi;
+    }
+
+    function sayHi() {
+        sendMessage(`Hi from ${guid}`);
+    }
+
+
+    function spawn_child() {
+        if (!child) {
+            const this_url = window.location.href;
+            console.log(this_url);
+            // 'https://vscode.dev'
+            // much better to have a tab
+            child = window.open(this_url, "_blank");
+
+            // Popup is kind of nice, but they can be blocked
+            // focus only works with popups
+            //child = window.open(this_url, "Boop", "popup");
+
+            // child.onmessage((ev) => {
+            //     addToReceived(ev);
+            // })
+            //sendMessage(`parent says hello ${guid}`);
+            switchMainButtonToSayHi();
+        }
+    }
+
+    function onMessage(message) {
+        console.log(message);
+        const data = message.data;
+        if (typeof data === "string") {
+            if (data.startsWith("parent says hello")) {
+                sendMessage(`child says hello ${guid}`);
+            }
+            if (data.startsWith("Hi")) {
+                console.log("focus");
+                // only works with popup window if preference that popups open in a differne tab
+                
+                if (child) {
+                    child.focus();
+                    //document.getElementById("text_area").focus();
+                } else {
+                    window.focus();
+                }
+
+                // alert display a dialog, and shows in tab, but kind of annoying
+                //alert("boop")
+            }
+        }
+        addToReceived(data);
+    }
+
+    function sendMessage(message) {
+        if (child) {
+            child.postMessage(message, "*");
+        } else if (window.opener) {
+            window.opener.postMessage(message, "*");
+        }
+    }
+
+    function addToReceived(message) {
+
+        const table = document.getElementById("messages");
+        const row = table.insertRow(1);
+        const cell = row.insertCell();
+        cell.innerHTML =
+            //Date.now() + " " + 
+            JSON.stringify(message);
+    }
+
+    initialize();
+</script>
+
+</html>
