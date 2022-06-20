@@ -17,3 +17,8 @@ A template for TypeScript NPM libraries with standard technologies to handle com
 [deploy](./documentation/deploy.md)
 
 [notes](./documentation/notes.md)
+
+## Getting Pupeteer to Work
+
+https://jestjs.io/docs/puppeteer
+
