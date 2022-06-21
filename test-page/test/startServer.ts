@@ -1,24 +1,35 @@
-import http, { Server } from "http";
-import express from "express";
+import http from "http";
 import path from "path";
+import * as fs from "fs";
 
-// starts server to serve specific resources
-export function startServer(port: number): Server {
-    //const port: number = serverPort;
-    const app = express();
-    
-    const serveResources = [
-        "test-page.js",
-        "test-page.html"
-    ];
+// all valid resources
+const serveResources = [
+    "test-page.js",
+    "test-page.html"
+];
 
-    serveResources.forEach((file) => {
-        app.get(`/${file}`, (_req, res) => {
-            res.sendFile(path.join(__dirname + `/resources/${file}`));
-        });
+// don't bother with express just write a simple node server.
+export function startServer(port: number) {
+    const server = http.createServer((req, res) => {
+        const {url} =  req;
+        //console.log(req.url);
+
+        const found = serveResources.filter((value) => `/${value}` === url );
+        //console.log(found);
+
+        if (found.length === 1) {
+            const fileName = found[0];
+            const filePath = path.join(__dirname + `/resources/${fileName}`);
+            const fileData = fs.readFileSync(filePath)
+
+            res.write(fileData);
+        } else {
+            res.write(`Not Found\n\nValid Resources:\n\n${serveResources.join("\n")}`);
+        }
+
+        res.end();
     });
-    
-    const server = http.createServer(app);
+
     server.listen(port);
 
     return server;

@@ -1,5 +1,4 @@
 import { hello } from "../src/index";
-//import 'expect-puppeteer';
 import * as puppeteer from "puppeteer";
 import { startServer } from "./startServer";
 import { serverPort } from "./constants";
@@ -12,22 +11,20 @@ test("basic", () => {
 });
 
 describe("test-page", () => {
+    let browser: puppeteer.Browser;
     let page: puppeteer.Page;
     let server: Server;
     beforeAll(async () => {
         server = startServer(serverPort);
-        const browser = await puppeteer.launch({ headless: false });
+        browser = await puppeteer.launch({ headless: true });
         page = await browser.newPage();
         await page.goto(`http://localhost:${serverPort}/test-page.html`);
     });
 
     afterAll(async () => {
-        await Promise.all(
-            [
-                new Promise((resolve) => server.close(resolve)),
-                page.close()
-            ]);
-
+        server.close();
+        await page.close();
+        await browser.close();
     });
 
     test("page basic", async () => {
@@ -41,5 +38,3 @@ describe("test-page", () => {
         expect(result).toBe(expected);
     });
 });
-
-
