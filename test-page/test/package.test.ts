@@ -30,9 +30,8 @@ describe("test-page", () => {
     test("page basic", async () => {
         const expected = "hello";
         const result = await page.evaluate(`(async() => {
-            return "hi"
-            //let result = testHello();
-            //return result;
+            let result = window.tests.testHello();
+            return result;
         })()`);
 
         expect(result).toBe(expected);
