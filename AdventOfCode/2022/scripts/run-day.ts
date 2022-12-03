@@ -6,6 +6,10 @@ const script = require(`../src/${dayDirectory}/run.ts`);
 
 import fs from "fs";
 
-const data = fs.readFileSync(`src/${dayDirectory}/data.sample.txt`, "utf-8");
+const [inputFileName] = process.argv.slice(2);
+
+const data = fs
+    .readFileSync(`src/${dayDirectory}/${inputFileName}`, "utf-8")
+    .replace(/\r\n/g, "\n");
 
 script.run(data);

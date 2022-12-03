@@ -31,7 +31,8 @@
         "check-environment": "./node_modules/.bin/ts-node scripts/check-environment.ts",
         "start": "./node_modules/.bin/ts-node test/main.ts",
         "download": "./node_modules/.bin/ts-node scripts/download.ts",
-        "day": "./node_modules/.bin/ts-node scripts/run-day.ts"
+        "day-test": "./node_modules/.bin/ts-node scripts/run-day.ts data.sample.txt",
+        "day": "./node_modules/.bin/ts-node scripts/run-day.ts data.txt"
     },
     "repository": {
         "type": "git",
