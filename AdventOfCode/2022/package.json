@@ -27,11 +27,11 @@
         "api-extractor": "./node_modules/.bin/api-extractor",
         "doc-extract": "./node_modules/.bin/api-extractor run --local --verbose",
         "doc-document": "./node_modules/.bin/api-documenter markdown --input-folder ./temp --output-folder ./doc",
-        "check-package": "./node_modules/.bin/ts-node scripts/check-package.ts",
         "check-install": "./node_modules/.bin/ts-node scripts/check-install.ts",
         "check-environment": "./node_modules/.bin/ts-node scripts/check-environment.ts",
-        "package-update": "./node_modules/.bin/ts-node scripts/update.ts",
-        "start": "./node_modules/.bin/ts-node test/main.ts"
+        "start": "./node_modules/.bin/ts-node test/main.ts",
+        "download": "./node_modules/.bin/ts-node scripts/download.ts",
+        "day": "./node_modules/.bin/ts-node scripts/run-day.ts"
     },
     "repository": {
         "type": "git",

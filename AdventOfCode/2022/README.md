@@ -1,19 +1,11 @@
 # package
 
-Simple Package Template
-
-[![main CI](https://github.com/wandyezj/package/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/wandyezj/package/actions/workflows/main.yml)
-
 ## About
 
-A template for TypeScript NPM libraries with standard technologies to handle common development scenarios.
+[Advent Of Code 2022](https://adventofcode.com/2022)
 
-[changelog](./CHANGELOG.md)
+Scripts
 
-[about](./documentation/about.md)
+> npm run download
 
-[setup](./documentation/setup.md)
-
-[deploy](./documentation/deploy.md)
-
-[notes](./documentation/notes.md)
+- downloads the data for the specified day and year based on session
