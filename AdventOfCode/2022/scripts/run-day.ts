@@ -48,14 +48,26 @@ async function setupDay(dayDirectory: string) {
     const data = await downloadData(year, day, session);
 
     const nameData: [string, string][] = [
-        ["data.txt", data.trimEnd()],
+        ["data.txt", data],
         ["data.sample.txt", ""],
         ["puzzle.txt", ""],
         [
             "run.ts",
             `
+import * as library from "../library";
+
+export function part1(data: string) {
+    // code
+}
+
+export function part2(data: string) {
+    // code
+}
+
 export function run(data: string) {
     // code
+    part1(data);
+    part2(data);
 }
 `,
         ],

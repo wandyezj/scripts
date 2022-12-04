@@ -6,6 +6,14 @@
 
 Scripts
 
-> npm run download
+> npm run day-setup
 
-- downloads the data for the specified day and year based on session
+- sets up the data for the specified day and year based on session.
+
+> npm run day-test
+
+- runs sample.data.txt
+
+> npm run day
+
+- runs sample.txt
