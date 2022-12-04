@@ -1,4 +1,4 @@
-import { arraySum } from "../lib/arraySum";
+import { arraySum } from "../library/arraySum";
 
 export function run(data: string) {
     const lines = data.trimEnd().split("\n");
