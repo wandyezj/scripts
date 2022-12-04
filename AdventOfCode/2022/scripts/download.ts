@@ -38,6 +38,7 @@ async function run() {
     const fileName = `${day.toString().padStart(2, "0")}.data.txt`;
 
     console.log(fileName);
+
     fs.writeFileSync(fileName, data);
 }
 
